@@ -1,0 +1,21 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tanstack/react-query": "^4.36.1",
+    "@trpc/client": "^10.43.3",
+    "@trpc/next": "^10.43.3",
+    "@trpc/react-query": "^10.43.3",
+    "@trpc/server": "^10.43.3",
+    "zod": "^3.22.4"
+  }
+}
