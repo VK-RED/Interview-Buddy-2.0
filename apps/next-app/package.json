@@ -11,7 +11,8 @@
   "dependencies": {
     "ui": "*",
     "tailwindconfig" : "*",
-    "api" : "*"
+    "api" : "*",
+    "auth" : "*"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
