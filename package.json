@@ -4,14 +4,19 @@
     "build": "turbo run build",
     "dev": "dotenv -- turbo dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "start" : "dotenv --turbo && npm run navigate",
+    "migrate-db": "dotenv -e .env -- npx prisma migrate dev --schema=packages/db/prisma/schema.prisma",
+    "init-db" : "dotenv -e .env -- npm run migrate ",
+    "migrate" : "cd packages/db && npx prisma migrate dev"
   },
   "devDependencies": {
+    "dotenv": "^16.3.1",  
+    "dotenv-cli": "latest",
     "eslint": "^8.48.0",
     "prettier": "^3.0.3",
     "tsconfig": "*",
-    "turbo": "latest",
-    "dotenv-cli": "latest"
+    "turbo": "latest"
   },
   "name": "Interview-Buddy-2.0",
   "packageManager": "npm@10.2.0",

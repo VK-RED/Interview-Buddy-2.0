@@ -12,8 +12,9 @@
     "ui": "*",
     "tailwindconfig" : "*",
     "api" : "*",
-    "auth" : "*"
-  },
+    "auth" : "*",
+    "db" : "*"
+  }, 
   "devDependencies": {
     "eslint-config-custom": "*",
     "tsconfig": "*"
