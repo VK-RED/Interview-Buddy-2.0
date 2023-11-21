@@ -17,7 +17,7 @@ export default function Home() {
   else{
     return (
       <>
-        <button onClick={() => signIn()}>Sign out</button>
+        <button onClick={() => signIn()}>Sign In</button>
       </>
     )
   }
