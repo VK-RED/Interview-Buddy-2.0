@@ -26,8 +26,8 @@
 // }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/d/migrate-shadow
 }
 
@@ -37,18 +37,18 @@ generator client {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -64,13 +64,15 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?        @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  conversation  Conversation[]
+  chat          Chat[]
 }
 
 model VerificationToken {
@@ -79,4 +81,35 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+//  This is the model for single conversation - user, assistant, system
+model Conversation {
+  id        String   @id @default(cuid())
+  role      Role
+  content   String
+  createdAt DateTime
+  updatedAt DateTime
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String
+}
+
+// Model for the complete conversation history
+
+model Chat {
+  id            String         @id @default(uuid())
+  createdAt     DateTime
+  updatedAt     DateTime
+  author        User           @relation(fields: [authorId], references: [id])
+  authorId      String
+  conversations Conversation[]
+}
+
+ 
+enum Role {
+  system
+  user
+  assistant
 }
