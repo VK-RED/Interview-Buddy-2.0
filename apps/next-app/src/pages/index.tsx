@@ -6,14 +6,25 @@ export default function Home() {
 
 
   const hello = trpc.hello.useQuery({ text: 'client' });
-  if (!hello.data) {
-    return <div>Loading...</div>;
+
+  const secretMessaage = trpc.secret.useQuery(null);
+
+  if(hello.data && secretMessaage.data){
+    return(
+      <div>
+        <div>{hello.data.greeting}</div>
+        <div>{secretMessaage.data}</div>
+      </div>
+      
+    )
   }
-  return (
-    <div>
-      <p>{hello.data.greeting}</p>
-    </div>
-  );
+  else{
+    return (
+      <div>
+        LOADING .....
+      </div>
+    )
+  }
 
   // const {data: session} = useSession();
 
