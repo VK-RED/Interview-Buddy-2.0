@@ -16,18 +16,6 @@ export default function Home() {
   );
 
   // const {data: session} = useSession();
-  // const res = trpc.hello.useQuery({text:"jo"});
-
-  // if(res.isLoading){
-  //   return(
-  //     <div>LOadiuggg !!!</div>
-  //   )
-  // }
-  // else{
-  //   return(
-  //     <div>{res.data?.greeting || "E"}</div>
-  //   )
-  // }
 
   // if(session){
   //   return(

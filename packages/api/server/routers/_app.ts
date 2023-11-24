@@ -8,7 +8,9 @@ export const appRouter = router({
         text: z.string(),
       }),
     )
-    .query((opts) => {
+    .query(async (opts) => {
+      const rep = await opts.ctx.prisma.user.findFirst({where:{name:"VK"}});
+      console.log(rep);
       return {
         greeting: `hello ${opts.input.text}`,
       };
