@@ -9,10 +9,9 @@ export const appRouter = router({
       }),
     )
     .query(async (opts) => {
-      const rep = await opts.ctx.prisma.user.findFirst({where:{name:"VK"}});
-      console.log(rep);
+      console.log(opts.ctx.session);
       return {
-        greeting: `hello ${opts.input.text}`,
+        greeting: `hello ${opts.input.text+" "+opts.ctx.session?.user?.email}`,
       };
     }),
     
