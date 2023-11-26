@@ -13,7 +13,8 @@
     "tailwindconfig" : "*",
     "api" : "*",
     "auth" : "*",
-    "db" : "*"
+    "db" : "*",
+    "ai" : "*"
   }, 
   "devDependencies": {
     "eslint-config-custom": "*",
