@@ -1,49 +1,51 @@
 import { signIn, signOut, useSession } from "auth";
 import { trpc } from "../utils/trpc";
+import { useEffect, useState } from "react";
 
 
 export default function Home() {
 
 
-  const hello = trpc.hello.useQuery({ text: 'client' });
+  const {data:session} = useSession();
 
-  const secretMessaage = trpc.secret.useQuery(null);
+  const [msg, setMsg] = useState("");
 
-  if(hello.data && secretMessaage.data){
-    return(
-      <div>
-        <div>{hello.data.greeting}</div>
-        <div>{secretMessaage.data}</div>
-      </div>
-      
-    )
+  useEffect(()=>{
+
+  },[msg])
+
+  const getChat = trpc.getChat.useQuery(null);
+  const initChat = trpc.interview.useMutation()
+
+  const handleClick = async () => {
+
+    initChat.mutate(null, {
+      onSuccess(data){
+        const res = data?.message || "RESULT NOT REURNED PROPERLY";
+        setMsg(res);
+      }
+    })
   }
-  else{
-    return (
+
+  
+
+  return (
+    <div>
+      <div>{session?.user?.name}</div>
+      <div>{msg}</div><br/>
+      <button onClick={handleClick}>Click to initiate the chat</button>
       <div>
-        LOADING .....
+        {
+          getChat.data?.map((c)=>
+            <div>
+              {c.message+" "+c.role}
+            </div>
+          )
+        }
       </div>
-    )
-  }
 
-  // const {data: session} = useSession();
-
-  // if(session){
-  //   return(
-  //     <>
-  //       <div>Congrats !! Successfully Signed In !!!</div>
-  //       <div>{`Signed in as ${session.user?.email}`}</div>
-  //       <button onClick={() => signOut()}>Sign out</button>
-  //     </>
-  //   )
-  // } 
-  // else{
-  //   return (
-  //     <>
-  //       <button onClick={() => signIn()}>Sign In</button>
-  //     </>
-  //   )
-  // }
+    </div>
+  )
   
 
 }
