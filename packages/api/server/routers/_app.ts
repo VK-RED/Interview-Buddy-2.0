@@ -101,6 +101,8 @@ export const appRouter = router({
 
               }),
 
+              //Procedure to find to latest chat with convo in ascending order
+              
   getChat:  procedure
             .input(z.null())
             .use(isAuth)
