@@ -43,11 +43,13 @@ cp .env.example .env
 ```
 - Use `openssl rand -base64 32` to generate a key and add it under `NEXTAUTH_SECRET` in the .env file.
 - Use your own API keys for the following environment variables `GOOGLE_ID`, `GOOGLE_SECRET`, `DATABASE_URL`, `OPENAI_API_KEY` in the .env file
+
 - Install all the dependencies in the root folder using the command
 
 ```
 npm i
 ```
+
 
 - Run the Prisma Migrations using the following command
 
@@ -55,12 +57,15 @@ npm i
 npm run init-db
 ```
 
+
 - Now run the Project using the command
 
 ```
 npm run dev
 ```
+
 - Now you can see your frontend being served at http://localhost:3000/
+
 
 ## What's inside
 
@@ -75,3 +80,15 @@ npm run dev
     - The `packages/tailwindconfig`contains tailwind configuration which is being used by `app` and the `ui` package.
     - The `packages/tsconfig` contains tailwind configurations which is being used by throughout the enire repo.
     - The `packages/ui` contains the shadcn/ui components. It is re-usable components and being styled using TailwindCSS.
+
+### Contributions
+
+I love and welcome open source contributions, if you have any queries, concerns or enhancements which you feel elevate or bring value to the repo, kindly feel free to raise them. Your feedback is valuable and will help me to improve the InterviewBuddy 2.0.
+
+To contribute, you can:
+
+    - **Raise an issue** : If you encounter any problems or have suggestions for improvements, please create an issue on this GitHub repository. I will review it and  work together with you to find a solution.
+
+    - **Submit a pull request** : If you have a specific improvement in mind, you can fork the repository, make your changes, and submit a pull request. I will review your changes and merge them if they align with the project's goals.
+
+Thank you for your support !!!
