@@ -7,7 +7,7 @@ Interview Buddy is an open source platform to help you land your next technical 
 ## Tech Stack
 
 - [Next.js](https://nextjs.org/)                 - Framework
-- [tRPC](https://trpc.io/)                       - API
+- [tRPC](https://trpc.io/)                      - API
 - [TypeScript](https://www.typescriptlang.org/)  - Language
 - [Prisma](https://www.prisma.io/)               - ORM
 - [NextAuth.js](https://next-auth.js.org/)       - Authentication
@@ -16,7 +16,7 @@ Interview Buddy is an open source platform to help you land your next technical 
 - [Tailwind](https://tailwindcss.com/)           - CSS
 - [shadcn/ui](https://ui.shadcn.com/)            - Component Library
 
-This uses [turborepo] as a Monorepo.
+This repository uses [Turbo](https://turbo.build/repo) as the Monorepo.
 
 ## Development
 
@@ -60,5 +60,18 @@ npm run init-db
 ```
 npm run dev
 ```
-- Now you can see your frontend being served at http://www.localhost:3000/
+- Now you can see your frontend being served at http://localhost:3000/
 
+## What's inside
+
+- The `apps` folder contains a next-app folder which is a `Next.js` app
+- The `packages` contains dependencies/folders used by either `apps` (or) other packages.
+
+    - The `packages/ai` contains the api for querying OpenAI.
+    - The `packages/api` contains everything related to [tRPC](https://trpc.io/). Including procedures, middlewares and context.
+    - The `packages/auth` contains the configurations of NextAuth for the app.
+    - The `packages/db` contains Prisma and it's schema.
+    - The `packages/eslint-config-custom` contains eslint configurations.
+    - The `packages/tailwindconfig`contains tailwind configuration which is being used by `app` and the `ui` package.
+    - The `packages/tsconfig` contains tailwind configurations which is being used by throughout the enire repo.
+    - The `packages/ui` contains the shadcn/ui components. It is re-usable components and being styled using TailwindCSS.
