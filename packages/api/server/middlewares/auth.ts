@@ -1,5 +1,5 @@
 import { TRPCError } from "@trpc/server";
-import {middleware} from "../trpc"
+import {middleware, procedure} from "../trpc"
 
 export const isAuth = middleware(async (opts) => {
     const {ctx} = opts;
@@ -12,3 +12,5 @@ export const isAuth = middleware(async (opts) => {
         }
     })
 })
+
+export const authProcedure  = procedure.use(isAuth);

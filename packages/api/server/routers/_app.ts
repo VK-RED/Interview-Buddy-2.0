@@ -2,8 +2,12 @@ import { z } from 'zod';
 import { procedure, router } from '../trpc';
 import { isAuth } from '../middlewares/auth';
 import { TRPCClientError } from '@trpc/client';
+import { interviewRouter } from './interview';
 
 export const appRouter = router({
+
+  interview: interviewRouter,
+
   hello: procedure
     .input(
       z.object({
@@ -23,7 +27,7 @@ export const appRouter = router({
             return "YOU CAN SEE THE SECRET MESSAGE";
           }),
 
-  interview: procedure
+  interview_test: procedure
               .input(z.null())
               .use(isAuth)
               .mutation(async(opts)=>{
