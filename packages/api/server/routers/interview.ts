@@ -33,7 +33,7 @@ export const interviewRouter = router({
                                     authorId:user.id,
                                     createdAt: new Date().toISOString(),
                                     updatedAt: new Date().toISOString(),
-                                    title: opts.input.name,
+                                    title: opts.input.name + " Interview",
                                 }
                             })
 
@@ -74,6 +74,8 @@ export const interviewRouter = router({
             }),
 
     // gets the latest chat from D.B
+
+    //TODO : You have to only return the chatID, chatTitle, convo with only role and content
     
     getLatestChat : authProcedure.
                     input(z.any().optional())
@@ -95,34 +97,37 @@ export const interviewRouter = router({
 
                                 if(user){
 
-                                    //get latest chat
+                                    //get latest chat from latestChat[]
 
-                                    const latestChat = await opts.ctx.prisma.chat.findMany({
+                                    const latestChatArr = await opts.ctx.prisma.chat.findMany({
                                         where:{
-                                        authorId: user?.id,
+                                            authorId: user?.id,
                                         },
-                                        include:{
-                                        conversations:{
-                                            orderBy:{createdAt:'asc'},
-                                        }
-                    
+                                        select:{
+                                            conversations:{
+                                                orderBy:{createdAt:'asc'},
+                                                select:{
+                                                    role:true,
+                                                    content:true,
+                                                }
+                                            },
+                                            title:true,
+                                            id:true
+    
                                         },
                                         orderBy:{createdAt: 'desc'},
                                         take:1
                                     })
 
-                                    if(latestChat[0].conversations.length < 1) throw new TRPCError({code:"INTERNAL_SERVER_ERROR"});
+                                    const latestChat = latestChatArr[0];
+
+                                    if(latestChat.conversations.length < 1) throw new TRPCError({code:"INTERNAL_SERVER_ERROR"});
                                     
-                                    if(latestChat[0].conversations.length < 2){
+                                    if(latestChat.conversations.length < 2){
 
-                                        const convo = latestChat[0].conversations.map((c)=>{
-                                            return {
-                                            role: c.role,
-                                            content: c.content,
-                                            }
-                                        });
+                                        const convoArr = latestChat.conversations;
 
-                                        convo.push({role:"user",content:readyPrompt});
+                                        convoArr.push({role:"user",content:readyPrompt});
 
                                         //TODO : send this msg to openAi collect the response , create a new convo for it and send the chat back to the user
 
@@ -135,24 +140,15 @@ export const interviewRouter = router({
                                                 authorId:user.id,
                                                 createdAt: new Date().toISOString(),
                                                 updatedAt: new Date().toISOString(),
-                                                chatId: latestChat[0].id
+                                                chatId: latestChat.id
                                             }
                                         })
 
-                                        const newLatestChat = await opts.ctx.prisma.chat.findUnique({
-                                            where:{id:latestChat[0].id},
-                                            include:{
-                                                conversations:{
-                                                    orderBy:{createdAt:'asc'},
-                                                }
-                                            },
-                                        });
-
-                                        return {chat:newLatestChat}
+                                        return {chatId: latestChat.id, chatTitle: latestChat.title, conversations:[{role:newConvo.role, content: newConvo.content}]}
 
                                     }
                                     else{
-                                        return {chat:latestChat[0]}
+                                        return {chatId: latestChat.id, chatTitle: latestChat.title, conversations:latestChat.conversations.splice(0,1)}
                                     }
 
                                 }
@@ -168,5 +164,89 @@ export const interviewRouter = router({
                             throw new TRPCError({code:"NOT_FOUND",message:"USER NOT AVAILABLE, KINDLY LOGIN AGAIN"});
                         }
 
-                    })
+                    }),
+
+        // get openai response for every user queries
+
+        getResponse :  authProcedure
+                        .input(z.object({content : z.string(), chatId : z.string()}))
+                        .mutation(async (opts)=>{
+
+                            if(opts.ctx.session.user){
+
+                                try {
+
+                                    const user = await opts.ctx.prisma.user.findFirst({where:{email:opts.ctx.session.user.email}});
+
+                                    if(user){
+
+                                        // Create convo for user query
+
+                                        const convo = await opts.ctx.prisma.conversation.create({
+                                            data:{
+                                                role:"user",
+                                                content:opts.input.content,
+                                                authorId:user.id,
+                                                chatId:opts.input.chatId,
+                                                createdAt: new Date().toISOString(),
+                                                updatedAt: new Date().toISOString(),
+                                            }
+                                        })
+
+                                        // filter out the updated convo from D.B
+
+                                        const updatedChat = await opts.ctx.prisma.chat.findUnique({
+                                            where:{
+                                                id: opts.input.chatId
+                                            },
+                                            select:{
+                                                conversations:{
+                                                    orderBy:{
+                                                        createdAt:'asc'
+                                                    },
+                                                    select:{
+                                                        content:true,
+                                                        role:true
+                                                    }
+                                                }
+                                            }
+                                        })
+
+                                        const convoArr = updatedChat?.conversations;
+
+                                        // TODO : SEND THIS CONVO[] TO GPT AND GET THE RESPONSE
+
+                                        const resp = "YEAH !!! THIS IS A GPT RESPONSE !!!"
+
+                                        
+                                        // CREATE A CONVO FOR THE GPT RESPONSE
+
+                                        const newConvo = await opts.ctx.prisma.conversation.create({
+                                            data:{
+                                                role:"assistant",
+                                                content:resp,
+                                                authorId:user.id,
+                                                chatId:opts.input.chatId,
+                                                createdAt: new Date().toISOString(),
+                                                updatedAt: new Date().toISOString(),
+                                            }
+                                        })
+
+                                        // RETURN THE GPT RESPONSE 
+
+                                        return {role:newConvo.role, content:newConvo.content}
+                                    }
+
+                                    
+                                } catch (error) {
+                                    console.log(error);
+                                    throw new TRPCError({code:"INTERNAL_SERVER_ERROR"});
+                                }
+                            }
+                            else{
+                                throw new TRPCError({code:"NOT_FOUND",message:"USER NOT AVAILABLE, KINDLY LOGIN AGAIN"});
+                            }
+
+                            
+                        })
 })
