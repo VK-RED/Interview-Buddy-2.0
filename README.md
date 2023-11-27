@@ -6,15 +6,15 @@ Interview Buddy is an open source platform to help you land your next technical 
 
 ## Tech Stack
 
-- [Next.js]     - Framework
-- [tRPC]        - API
-- [TypeScript]  - Language
-- [Prisma]      - ORM
-- [NextAuth.js] - Authentication
-- [PostgreSql]  - Database
-- [Recoil]      - State Management
-- [Tailwind]    - CSS
-- [shadcn/ui]   - Component Library
+- [Next.js](https://nextjs.org/)                 - Framework
+- [tRPC](https://trpc.io/)                       - API
+- [TypeScript](https://www.typescriptlang.org/)  - Language
+- [Prisma](https://www.prisma.io/)               - ORM
+- [NextAuth.js](https://next-auth.js.org/)       - Authentication
+- [PostgreSql](https://www.postgresql.org/)      - Database
+- [Recoil](https://recoiljs.org/)                - State Management
+- [Tailwind](https://tailwindcss.com/)           - CSS
+- [shadcn/ui](https://ui.shadcn.com/)            - Component Library
 
 This uses [turborepo] as a Monorepo.
 
