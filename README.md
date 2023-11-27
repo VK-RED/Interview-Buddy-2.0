@@ -1,6 +1,6 @@
 # Interview Buddy 2.0
 
-:construction: :construction: **NOTE : The Application is currently in Development** `:construction:` :construction:
+:construction:  **NOTE : The Application is currently in Development**  :construction:
 
 Interview Buddy is an open source platform to help you land your next technical interview. Practice in an interview environment with simulated scenarios and real-time feedback. Build confidence and face interviews with a prepared and positive mindset, ready to shine.
 
@@ -22,7 +22,7 @@ This repository uses [Turbo](https://turbo.build/repo) as the Monorepo.
 
 ### Docker Setup
 
-The Docker Setup will be added soon !!! 
+The Docker Setup will be coming soon !!! 
 
 ### Manual Setup
 
