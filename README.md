@@ -1,6 +1,6 @@
 # Interview Buddy 2.0
 
-(NOTE : The Application is currently in Development)
+:construction: :construction: **NOTE : The Application is currently in Development** `:construction:` :construction:
 
 Interview Buddy is an open source platform to help you land your next technical interview. Practice in an interview environment with simulated scenarios and real-time feedback. Build confidence and face interviews with a prepared and positive mindset, ready to shine.
 
