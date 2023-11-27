@@ -100,6 +100,7 @@ model Conversation {
 
 model Chat {
   id            String         @id @default(uuid())
+  title         String
   createdAt     DateTime
   updatedAt     DateTime
   author        User           @relation(fields: [authorId], references: [id])

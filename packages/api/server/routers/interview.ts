@@ -33,6 +33,7 @@ export const interviewRouter = router({
                                     authorId:user.id,
                                     createdAt: new Date().toISOString(),
                                     updatedAt: new Date().toISOString(),
+                                    title: opts.input.name,
                                 }
                             })
 
@@ -72,7 +73,8 @@ export const interviewRouter = router({
                 }
             }),
 
-
+    // gets the latest chat from D.B
+    
     getLatestChat : authProcedure.
                     input(z.any().optional())
                     .query(async(opts)=>{
