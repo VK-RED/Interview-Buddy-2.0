@@ -9,23 +9,18 @@ export default function Home() {
   const {data:session} = useSession();
 
   const [msg, setMsg] = useState("");
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(()=>{
 
   },[msg])
 
-  const getChat = trpc.getChat.useQuery(null);
-  const initChat = trpc.interview_test.useMutation()
   const initTopic = trpc.interview.topic.useMutation()
-
-  const handleClick = async () => {
-
-    initChat.mutate(null, {
-      onSuccess(data){
-        const res = data?.message || "RESULT NOT REURNED PROPERLY";
-      }
-    })
-  }
+  const chat = trpc.interview.getLatestChat.useQuery(enabled,{
+    onSuccess(data) {
+      console.log(data?.chat)
+    },
+  })
 
   const handleTopic = async()=>{
 
@@ -43,17 +38,11 @@ export default function Home() {
   return (
     <div>
       <div>{session?.user?.name}</div>
-      <div>{msg}</div><br/>
-      <button onClick={handleClick}>Click to initiate the chat</button><br/>
-      <button onClick={handleTopic}>Click to send a topic</button>
+      <button onClick={handleTopic}>Click to send a topic</button><br />
+      <button onClick={(e)=>setEnabled(true)} >Click to get Latest Chat</button>
+      <br/>
       <div>
-        {
-          getChat.data?.map((c)=>
-            <div>
-              {c.message+" "+c.role}
-            </div>
-          )
-        }
+        {msg}
       </div>
 
     </div>
