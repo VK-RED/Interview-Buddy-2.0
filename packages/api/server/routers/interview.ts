@@ -2,7 +2,7 @@ import { router } from "../trpc";
 import { authProcedure } from "../middlewares/auth";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
-import { defPrompt, readyPrompt } from "../../constants";
+import { defPrompt, gptResponseMissing, readyPrompt } from "../../constants";
 import { openai } from "ai";
 
 export const interviewRouter = router({
@@ -58,7 +58,7 @@ export const interviewRouter = router({
 
                             // Non-streaming:
                             const completion = await openai.chat.completions.create({
-                                model: 'gpt-4',
+                                model: 'gpt-3.5-turbo',
                                 messages: strippedConvo
                             });
 
@@ -79,8 +79,6 @@ export const interviewRouter = router({
             }),
 
     // gets the latest chat from D.B
-
-    //TODO : You have to only return the chatID, chatTitle, convo with only role and content
     
     getLatestChat : authProcedure.
                     input(z.any().optional())
@@ -134,9 +132,16 @@ export const interviewRouter = router({
 
                                         convoArr.push({role:"user",content:readyPrompt});
 
-                                        //TODO : send this msg to openAi collect the response , create a new convo for it and send the chat back to the user
+                                        //Send this msg to openAi collect the response , create a new convo for it and send the chat back to the user
 
-                                        const res = {role:"assistant",content:"Sure, who is Heisenberg ?"}
+                                        const completion = await openai.chat.completions.create({
+                                            model: 'gpt-3.5-turbo',
+                                            messages: convoArr,
+                                        });
+
+                                        const openAiRes = completion.choices[0]?.message?.content || gptResponseMissing;
+
+                                        const res = {role:"assistant",content:openAiRes}
 
                                         const newConvo = await opts.ctx.prisma.conversation.create({
                                             data:{
@@ -153,7 +158,7 @@ export const interviewRouter = router({
 
                                     }
                                     else{
-                                        return {chatId: latestChat.id, chatTitle: latestChat.title, conversations:latestChat.conversations.splice(0,1)}
+                                        return {chatId: latestChat.id, chatTitle: latestChat.title, conversations:latestChat.conversations.slice(1)}
                                     }
 
                                 }

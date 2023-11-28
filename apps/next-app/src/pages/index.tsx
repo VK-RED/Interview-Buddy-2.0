@@ -18,6 +18,11 @@ export default function Home() {
 
   const initTopic = trpc.interview.topic.useMutation()
   const getRes = trpc.interview.getResponse.useMutation();
+  const latestChat = trpc.interview.getLatestChat.useQuery({},{
+    onSuccess(data){
+      console.log(data)
+    }
+  })
 
   const handleTopic = async()=>{
 
@@ -38,20 +43,41 @@ export default function Home() {
       }
     })
   }
-  
 
-  return (
-    <div>
-      <div>{session?.user?.name}</div>
-      <button onClick={handleTopic}>Click to send a topic</button><br />
-      <button onClick={handleRes}>Click to get GPT RESPONSE</button>
-      <br/>
+  if(latestChat.isLoading) return <div>LOADING !!!!</div>
+  else{
+    return (
       <div>
-        {msg}
-      </div>
+        
+          <div>{latestChat.data?.chatId}</div>
+          <div>{latestChat.data?.chatTitle}</div>
 
-    </div>
-  )
+          <div>
+            {
+              latestChat.data?.conversations.map((con)=>(
+                <div>
+                  <div>{con.role+": "+con.content}</div>
+                </div>
+              ))
+            }
+          </div>
+        
+      </div>
+    )
+  }
+
+  // return (
+  //   <div>
+  //     <div>{session?.user?.name}</div>
+  //     <button onClick={handleTopic}>Click to send a topic</button><br />
+  //     <button onClick={handleRes}>Click to get GPT RESPONSE</button>
+  //     <br/>
+  //     <div>
+  //       {msg}
+  //     </div>
+
+  //   </div>
+  // )
   
 
 }
