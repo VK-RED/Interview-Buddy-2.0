@@ -8,76 +8,76 @@ export const metaRouter = router ({
     // count convos for a given chat
 
     countConvos : authProcedure
-    .input(z.object({chatId: z.string()}))
-    .query(async(opts)=>{
-        
-        // get the user 
+                    .input(z.object({chatId: z.string()}))
+                    .query(async(opts)=>{
+                        
+                        // get the user 
 
-        if(opts.ctx.session.user){
+                        if(opts.ctx.session.user){
 
-            try {
+                            try {
 
-                const user = await opts.ctx.prisma.user.findFirst({where:{email:opts.ctx.session.user.email}});
+                                const user = await opts.ctx.prisma.user.findFirst({where:{email:opts.ctx.session.user.email}});
 
-                if(user){
+                                if(user){
 
-                    const totalConversations = await opts.ctx.prisma.conversation.count({
-                        where:{
-                            authorId : user.id,
-                            chatId: opts.input.chatId,
+                                    const totalConversations = await opts.ctx.prisma.conversation.count({
+                                        where:{
+                                            authorId : user.id,
+                                            chatId: opts.input.chatId,
+                                        }
+                                    })
+
+                                    return {totalConversations}
+                                }
+                                
+                            } catch (error) {
+                                console.log(error);
+                                throw new TRPCError({code:"INTERNAL_SERVER_ERROR"});
+                            }
+
                         }
-                    })
-
-                    return {totalConversations}
-                }
-                
-            } catch (error) {
-                console.log(error);
-                throw new TRPCError({code:"INTERNAL_SERVER_ERROR"});
-            }
-
-        }
-        else{
-            throw new TRPCError({code:"NOT_FOUND",message:"USER NOT AVAILABLE, KINDLY LOGIN AGAIN"});
-        }
-    }),
+                        else{
+                            throw new TRPCError({code:"NOT_FOUND",message:"USER NOT AVAILABLE, KINDLY LOGIN AGAIN"});
+                        }
+                    }),
 
     // get total conversations
 
     countTotalConvos : authProcedure
-    .input(z.any().optional())
-    .query(async(opts)=>{
-        
-        // get the user 
+                        .input(z.any().optional())
+                        .query(async(opts)=>{
+                            
+                            // get the user 
 
 
-        if(opts.ctx.session.user){
+                            if(opts.ctx.session.user){
 
-            try {
+                                try {
 
-                const user = await opts.ctx.prisma.user.findFirst({where:{email:opts.ctx.session.user.email}});
+                                    const user = await opts.ctx.prisma.user.findFirst({where:{email:opts.ctx.session.user.email}});
 
-                if(user){
+                                    if(user){
 
-                    const totalConversations = await opts.ctx.prisma.conversation.count({
-                        where:{
-                            authorId : user.id
-                        }
-                    })
+                                        const totalConversations = await opts.ctx.prisma.conversation.count({
+                                            where:{
+                                                authorId : user.id
+                                            }
+                                        })
 
-                    return {totalConversations}
-                }
-                
-            } catch (error) {
-                console.log(error);
-                throw new TRPCError({code:"INTERNAL_SERVER_ERROR"});
-            }
+                                        return {totalConversations}
+                                    }
+                                    
+                                } catch (error) {
+                                    console.log(error);
+                                    throw new TRPCError({code:"INTERNAL_SERVER_ERROR"});
+                                }
 
-        }
-        else{
-            throw new TRPCError({code:"NOT_FOUND",message:"USER NOT AVAILABLE, KINDLY LOGIN AGAIN"});
-        }
-    }),
+                            }
+                            else{
+                                throw new TRPCError({code:"NOT_FOUND",message:"USER NOT AVAILABLE, KINDLY LOGIN AGAIN"});
+                            }
+                        }),
 
     // get total chats
 
