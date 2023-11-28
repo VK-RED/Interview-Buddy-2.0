@@ -222,11 +222,18 @@ export const interviewRouter = router({
                                             }
                                         })
 
-                                        const convoArr = updatedChat?.conversations;
+                                        if(!updatedChat?.conversations) throw new TRPCError({code:"INTERNAL_SERVER_ERROR"});
 
-                                        // TODO : SEND THIS CONVO[] TO GPT AND GET THE RESPONSE
+                                        const convoArr = updatedChat.conversations;
 
-                                        const resp = "YEAH !!! THIS IS A GPT RESPONSE !!!"
+                                        //SEND THIS CONVO[] TO GPT AND GET THE RESPONSE
+
+                                        const completion = await openai.chat.completions.create({
+                                            model: 'gpt-3.5-turbo',
+                                            messages: convoArr,
+                                          });
+
+                                        const resp = completion.choices[0]?.message?.content || gptResponseMissing;
 
                                         
                                         // CREATE A CONVO FOR THE GPT RESPONSE
