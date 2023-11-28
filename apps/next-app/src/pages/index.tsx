@@ -18,6 +18,13 @@ export default function Home() {
 
   const initTopic = trpc.interview.topic.useMutation()
   const getRes = trpc.interview.getResponse.useMutation();
+
+  const totalChat = trpc.meta.countChats.useQuery({},{
+    onSuccess(data){
+      console.log(data?.totalChats);
+    }
+  })
+
   // const latestChat = trpc.interview.getLatestChat.useQuery({},{
   //   onSuccess(data){
   //     console.log(data)
