@@ -3,6 +3,7 @@ import { authProcedure } from "../middlewares/auth";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { defPrompt, readyPrompt } from "../../constants";
+import { openai } from "ai";
 
 export const interviewRouter = router({
 
@@ -42,7 +43,7 @@ export const interviewRouter = router({
 
                             const convo = await opts.ctx.prisma.conversation.create({
                                 data:{
-                                    role:"system",
+                                    role:'system',
                                     content: defPrompt+opts.input.name,
                                     authorId:user.id,
                                     createdAt: new Date().toISOString(),
@@ -51,13 +52,17 @@ export const interviewRouter = router({
                                 }
                             })
 
-                            const strippedConvo: { content: string, role: string }[] = [];
+                            const strippedConvo: { content: string, role: 'system' | 'user' | 'assistant' }[] = [];
 
                             strippedConvo.push({role:convo.role, content:convo.content});
 
-                            //TODO : send this strippedConvo to openAi
+                            // Non-streaming:
+                            const completion = await openai.chat.completions.create({
+                                model: 'gpt-4',
+                                messages: strippedConvo
+                            });
 
-                            return {message: "INTERVIEW INITIALISATION SUCCESS, REIDRECT THE USER "}
+                            return {message: `INTERVIEW INITIALISATION SUCCESS, REDIRECT THE USER.`}
                         }
                         
 
