@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from "auth";
 import { trpc } from "../utils/trpc";
 import { useEffect, useState } from "react";
-
+import {Navbar} from "ui"
 
 export default function Home() {
 
@@ -75,6 +75,7 @@ export default function Home() {
 
   return (
     <div>
+      <Navbar/>
       <div>{session?.user?.name}</div>
       <button onClick={handleTopic}>Click to send a topic</button><br />
       <button onClick={handleRes}>Click to get GPT RESPONSE</button>
