@@ -18,13 +18,6 @@ export function Navbar({profilePic, status, signIn, signOut}:NavbarPropType){
                 
               <DarkModeToggle /> 
 
-                <div>
-                    <Avatar>
-                        <AvatarImage src={profilePic} alt="@shadcn" />
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                </div> 
-
                 <AvatarToggle 
                             profilePic={profilePic} 
                             status={status} 

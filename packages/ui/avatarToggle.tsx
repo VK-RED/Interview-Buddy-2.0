@@ -2,7 +2,6 @@
 
 import * as React from "react"
 
-import { Button } from "ui/src/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,10 +31,10 @@ export function AvatarToggle({status,profilePic,signIn,signOut}:AvatarTogglerTyp
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={()=>{
             if(status === "unauthenticated"){
-                signOut();
+                signIn();
                 return;
             }
-            signIn()
+            signOut()
           }}>
             {status==="authenticated" ? "Signout" :"Signin"}
           </DropdownMenuItem>

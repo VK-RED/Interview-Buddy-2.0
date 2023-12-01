@@ -15,9 +15,6 @@ export default function Home() {
       />
 
       
-      <div>
-        <button onClick={() => signIn()}>Sign in</button>
-      </div>
     </div>
   )
   
