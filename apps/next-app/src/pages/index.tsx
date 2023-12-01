@@ -3,14 +3,20 @@ import {Navbar} from "ui"
 
 export default function Home() {
 
-  const {data:session} = useSession();
+  const {data:session,status} = useSession();
 
   return (
     <div>
-      <Navbar profilePic = {session?.user?.image||""}/>
+
+      <Navbar profilePic = {session?.user?.image||""} 
+              status={status||""} 
+              signIn={signIn} 
+              signOut={signOut}
+      />
+
+      
       <div>
-      <button
-         onClick={() => signIn()}>Sign in</button>
+        <button onClick={() => signIn()}>Sign in</button>
       </div>
     </div>
   )
