@@ -1,11 +1,21 @@
+import type { Session } from "next-auth";
 import { DarkModeToggle } from "./darkModeToggle";
+import { Avatar, AvatarFallback, AvatarImage } from "./src/ui/avatar";
 
-export function Navbar(){
+export function Navbar({profilePic}:{profilePic:string}){
 
     return (
-        <div className="border h-12 flex justify-between">
-            <h1 className="ml-10 font-bold text-2xl font-sans">Interview Buddy</h1>
-            <DarkModeToggle/>
+        <div className="border  py-3 flex justify-between items-center">
+            <h1 className="mx-10 font-bold text-2xl font-mono">Interview Buddy</h1>
+            <div className="flex space-x-5 mr-5">
+              <DarkModeToggle /> 
+                <div>
+                    <Avatar>
+                        <AvatarImage src={profilePic} alt="@shadcn" />
+                        <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                </div> 
+            </div>
         </div>
     )
 }
