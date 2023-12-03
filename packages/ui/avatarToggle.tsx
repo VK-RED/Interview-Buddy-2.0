@@ -23,13 +23,14 @@ export function AvatarToggle({status,profilePic,signIn,signOut}:AvatarTogglerTyp
     return(
         <DropdownMenu>
         <DropdownMenuTrigger asChild>
-            <Avatar>
+            <Avatar className="cursor-pointer">
                 <AvatarImage src={profilePic} alt="@shadcn" />
                 <AvatarFallback>CN</AvatarFallback>
             </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={()=>{
+          <DropdownMenuItem className="cursor-pointer"
+           onClick={()=>{
             if(status === "unauthenticated"){
                 signIn();
                 return;
