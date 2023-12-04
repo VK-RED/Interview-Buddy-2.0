@@ -47,7 +47,7 @@ export default function Topics(){
     }
     else{
         return(
-            <div>
+            <div className="min-w-[500px]">
 
                 <Navbar signIn={signIn}
                         signOut={signOut}

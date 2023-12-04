@@ -15,10 +15,13 @@ export default function Interview(){
             enabled:false,
             onSuccess(data){
                 setChatTitle((t) => data?.chatTitle||"");
-                console.log(data);
+                setConvos((conv) => data?.conversations||[]);
             }
         }
     );
+
+    const [convos, setConvos] = useState(data?.conversations);
+
 
 
     useEffect(()=>{
@@ -30,7 +33,11 @@ export default function Interview(){
 
             refetch();
         }
-    },[status,chatTitle])
+    },[status])
+
+    useEffect(()=>{
+
+    },[convos])
 
     if(status === "loading"){
         return(
@@ -45,7 +52,7 @@ export default function Interview(){
     else{
         return(
 
-            <div>
+            <div className="min-w-[500px]">
 
                 <Navbar signIn={signIn}
                         signOut={signOut}
@@ -57,7 +64,7 @@ export default function Interview(){
                    <h1 className="font-semibold  text-center text-3xl my-3">{chatTitle}</h1>
                     <div>
                         {
-                            data?.conversations.map((convo,ind)=>(
+                            convos?.map((convo,ind)=>(
 
                                 <div key = {ind}>
                                     {
