@@ -1,4 +1,4 @@
-import { Navbar, useToast  } from "ui"
+import { Navbar, useToast, ResponseCard  } from "ui"
 import { signIn, signOut, useSession } from "auth";
 import { useRouter } from "next/router";
 import { trpc } from "../../utils/trpc";
@@ -60,17 +60,20 @@ export default function Interview(){
                         status={status}
                 />
 
-                <div className="my-20">
-                   <h1 className="font-semibold  text-center text-3xl my-3">{chatTitle}</h1>
-                    <div>
+                <div className="border border-red-300 h-screen mt-5 px-10 py-3">
+
+                   <h1 className="font-semibold  text-center text-3xl my-5">{chatTitle}</h1>
+
+
+                    <div className="border border-green-400 p-5 my-10">
                         {
                             convos?.map((convo,ind)=>(
 
-                                <div key = {ind}>
-                                    {
-                                        convo.role+"  :"+"  "+convo.content
-                                    }
-                                </div>
+                                <ResponseCard 
+                                    key={ind}
+                                    content={convo.content}
+                                    role={convo.role}
+                                />
                             ))
                         }
                     </div>

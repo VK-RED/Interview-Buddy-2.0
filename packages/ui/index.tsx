@@ -4,6 +4,7 @@ export { Navbar } from "./navbar"
 export { ThemeProvider } from "./theme-provider"
 export { InterviewCard } from "./interviewCard"
 export { AlertDialoger } from "./alertDialoger"
+export { ResponseCard } from "./responseCard"
 export * from "./src/ui/accordion";
 export * from "./src/ui/button";
 export * from "./src/ui/dropdown-menu";
