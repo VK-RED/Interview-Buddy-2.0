@@ -20,7 +20,8 @@ export default function Topics(){
                     toast({
                         title: "Interview Initialised Successfully !!!",
                         description: "You will be redirected to the Interview Page now.",
-                    })
+                    });
+                    router.push("/interview");
                 },
                 onError(error){
                     console.log(error);
