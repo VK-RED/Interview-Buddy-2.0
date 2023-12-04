@@ -17,9 +17,11 @@ type AlertDialogerPropType = {
     buttonTitle: string,
     alertTitle: string,
     alertDescription: string,
+    onClick : (name:string) => void,
+    interviewTitle: string,
 }
 
-export function AlertDialoger({buttonTitle,alertTitle,alertDescription} : AlertDialogerPropType){
+export function AlertDialoger({buttonTitle,alertTitle,alertDescription,onClick,interviewTitle} : AlertDialogerPropType){
 
     return (
         <AlertDialog >
@@ -35,7 +37,7 @@ export function AlertDialoger({buttonTitle,alertTitle,alertDescription} : AlertD
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction>Continue</AlertDialogAction>
+                    <AlertDialogAction onClick={()=>onClick(interviewTitle)} >Continue</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
         </AlertDialog>

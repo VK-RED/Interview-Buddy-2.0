@@ -13,10 +13,11 @@ import { AlertDialoger } from "./alertDialoger"
 type InterviewCardPropType = {
     imgSrc? : string,
     cardTitle : string,
+    onClick : (name:string) => void,
 }
 
 
-export function InterviewCard({imgSrc, cardTitle} : InterviewCardPropType){
+export function InterviewCard({imgSrc, cardTitle, onClick} : InterviewCardPropType){
 
     return(
         
@@ -33,7 +34,9 @@ export function InterviewCard({imgSrc, cardTitle} : InterviewCardPropType){
             </CardContent>
             <CardFooter className="flex justify-center">
                 <div className="absolute bottom-3">
-                    <AlertDialoger  
+                    <AlertDialoger
+                        onClick={onClick}
+                        interviewTitle={cardTitle}
                         buttonTitle="Select"
                         alertTitle="Are you absolutely sure?"
                         alertDescription={`You have selected ${cardTitle} as your interview topic. On clicking the continue button you will be interviewed on the selected topic`}

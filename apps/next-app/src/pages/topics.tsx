@@ -2,12 +2,24 @@ import { Navbar,InterviewCard  } from "ui"
 import { signIn, signOut, useSession } from "auth";
 import { useRouter } from "next/router";
 import  { LANGUAGES,SUBJECTS } from "../assets/constants"
-
+import { trpc } from "../utils/trpc";
 
 export default function Topics(){
 
     const {data:session, status} = useSession();
     const router = useRouter();
+    const {mutate,isLoading} = trpc.interview.topic.useMutation();
+
+    //Helper function to pass the mutation as a Prop to Children
+    function mutateHelper(name:string){
+        mutate({name:name.toUpperCase()},
+            {
+                onSuccess(data){
+                    console.log(data);
+                }
+            }    
+        )
+    }
 
     if(status === "loading"){
         return(
@@ -41,7 +53,7 @@ export default function Topics(){
 
                             {
                                 LANGUAGES.map((LANG,ind)=>(
-                                    <InterviewCard key={ind} cardTitle = {LANG.name} imgSrc={LANG.src} />
+                                    <InterviewCard key={ind} cardTitle = {LANG.name} imgSrc={LANG.src} onClick={mutateHelper}  />
                                 ))
                             }
 
@@ -57,7 +69,7 @@ export default function Topics(){
 
                             {
                                 SUBJECTS.map((SUBJECT,ind)=>(
-                                    <InterviewCard key={ind} cardTitle = {SUBJECT.name} imgSrc={SUBJECT.src} />
+                                    <InterviewCard key={ind} cardTitle = {SUBJECT.name} imgSrc={SUBJECT.src} onClick={mutateHelper} />
                                 ))
                             }
 
