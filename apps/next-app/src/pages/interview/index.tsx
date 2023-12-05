@@ -73,6 +73,7 @@ export default function Interview(){
                                     key={ind}
                                     content={convo.content}
                                     role={convo.role}
+                                    userName={session?.user?.name||"You"}
                                 />
                             ))
                         }
