@@ -1,4 +1,4 @@
-import { Navbar, useToast, ResponseCard  } from "ui"
+import { Navbar, useToast, ResponseCard, TextareaWithLabel, Button  } from "ui"
 import { signIn, signOut, useSession } from "auth";
 import { useRouter } from "next/router";
 import { trpc } from "../../utils/trpc";
@@ -21,8 +21,6 @@ export default function Interview(){
     );
 
     const [convos, setConvos] = useState(data?.conversations);
-
-
 
     useEffect(()=>{
         if(status==="authenticated"){
@@ -60,25 +58,61 @@ export default function Interview(){
                         status={status}
                 />
 
-                <div className="border border-red-300 h-screen mt-5 px-10 py-3">
+                <div className="h-screen mt-5 px-10 py-3">
 
-                   <h1 className="font-semibold  text-center text-3xl my-5">{chatTitle}</h1>
+                    <div className="px-10 py-8 m-auto rounded-xl sticky top-[820px] flex items-center justify-center border border-zinc-300 dark:border-zinc-600 dark:bg-slate-950 z-10 space-x-5 sm:w-[600px] md:w-[700px] lg:w-[900px] shadow-xl bg-slate-50">
 
+                            <TextareaWithLabel />
 
-                    <div className="border border-green-400 p-5 my-10">
-                        {
-                            convos?.map((convo,ind)=>(
-
-                                <ResponseCard 
-                                    key={ind}
-                                    content={convo.content}
-                                    role={convo.role}
-                                    userName={session?.user?.name||"You"}
-                                />
-                            ))
-                        }
+                            <Button>
+                                Submit
+                            </Button>
                     </div>
+
+                    <div className="relative top-[-120px]">
+
+                        <h1 className="font-semibold  text-center text-3xl relative my-5">{chatTitle}</h1>
+
+
+                        <div className="p-5 my-10">
+                            {
+                                convos?.map((convo,ind)=>(
+
+                                    <ResponseCard 
+                                        key={ind}
+                                        content={convo.content}
+                                        role={convo.role}
+                                        userName={session?.user?.name||"You"}
+                                    />
+                                ))
+                            }
+
+                            
+                        </div>
+
+                        
+
+
+                    </div>
+
+                    
+
+                    
+
+                    
+                    
+                    
+                    
+                    
+                   
+
+                   
+
+
+                    
                 </div>
+
+                
                 
             </div>
         )
