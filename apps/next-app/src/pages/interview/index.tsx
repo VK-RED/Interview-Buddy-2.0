@@ -10,15 +10,23 @@ export default function Interview(){
     const router = useRouter();
     const { toast } = useToast();
     const [chatTitle, setChatTitle] = useState("");
+    const [chatId, setChatId] = useState("");
+    const [userPrompt, setUserPrompt] = useState("");
+
+    //fetch the initial convos
     const {data, refetch} = trpc.interview.getLatestChat.useQuery({},
         {
             enabled:false,
             onSuccess(data){
+                setChatId((chatId) => data?.chatId||"");
                 setChatTitle((t) => data?.chatTitle||"");
                 setConvos((conv) => data?.conversations||[]);
             }
         }
     );
+    
+    //mutation to get and post each user response
+    const {mutate} = trpc.interview.getResponse.useMutation();
 
     const [convos, setConvos] = useState(data?.conversations);
 
@@ -36,6 +44,29 @@ export default function Interview(){
     useEffect(()=>{
 
     },[convos])
+
+    function getResponse():void{
+
+        const content = userPrompt;
+        setUserPrompt( pr => "");
+
+        setConvos((con)=>{
+            const existCon = con || [];
+            return [...existCon, {role:"user",content}];
+        })
+
+        mutate({chatId,content},{
+            onSuccess(data){
+            
+                setConvos((con)=>{
+                    const existCon = con || [];
+                    return [...existCon, {role:data?.role||"user",content:data?.content||""}];
+                })
+
+            }
+        })
+    }
+    
 
     if(status === "loading"){
         return(
@@ -62,9 +93,9 @@ export default function Interview(){
 
                     <div className="px-10 py-8 m-auto rounded-xl sticky top-[820px] flex items-center justify-center border border-zinc-300 dark:border-zinc-600 dark:bg-slate-950 z-10 space-x-5 sm:w-[600px] md:w-[700px] lg:w-[900px] shadow-xl bg-slate-50">
 
-                            <TextareaWithLabel />
+                            <TextareaWithLabel userPrompt = {userPrompt} setUserPrompt = {setUserPrompt} />
 
-                            <Button>
+                            <Button onClick={()=>getResponse()}>
                                 Submit
                             </Button>
                     </div>
