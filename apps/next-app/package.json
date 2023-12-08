@@ -14,7 +14,8 @@
     "api" : "*",
     "auth" : "*",
     "db" : "*",
-    "ai" : "*"
+    "ai" : "*",
+    "store" : "*"
   }, 
   "devDependencies": {
     "eslint-config-custom": "*",

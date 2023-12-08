@@ -4,6 +4,7 @@ import { SessionProvider } from 'auth';
 import { trpc } from "../utils/trpc";
 import { ThemeProvider } from 'ui';
 import { Toaster } from 'ui';
+import { RecoilRoot } from 'store';
 
 const MyApp: AppType = ({ Component, pageProps : {session, ...pageProps} } : AppProps) => {
   return (
@@ -15,8 +16,10 @@ const MyApp: AppType = ({ Component, pageProps : {session, ...pageProps} } : App
             disableTransitionOnChange
     >
       <SessionProvider session={session}>
-        <Toaster />
-        <Component {...pageProps} />
+        <RecoilRoot>
+          <Toaster />
+          <Component {...pageProps} />
+        </RecoilRoot>
       </SessionProvider>
     </ThemeProvider>
 
