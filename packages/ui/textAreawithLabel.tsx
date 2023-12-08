@@ -9,10 +9,13 @@ type TextareaWithLabelInputProps = {
 export function TextareaWithLabel({userPrompt, setUserPrompt}: TextareaWithLabelInputProps) {
     return (
       <div className="grid gap-1.5 w-full ">
-        <Textarea onChange={(e)=>{
+        <Textarea 
+        
+        onChange={(e)=>{
           setUserPrompt(pr => e.target.value)
-          
-        }} placeholder="Type your response ...." id="message" value={userPrompt} />
+        }} 
+        
+        placeholder="Type your response ...." id="message" value={userPrompt} />
       </div>
     )
   }

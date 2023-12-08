@@ -3,32 +3,38 @@ import { useSession } from "auth";
 import { useRouter } from "next/router";
 import { trpc } from "../../utils/trpc";
 import { useEffect, useState } from "react";
+import { useRecoilValue,useSetRecoilState,chatAtomSelector, chatAtom } from "store";
 
 export default function Interview(){
 
     const {data:session, status} = useSession();
     const router = useRouter();
     const { toast } = useToast();
-    const [chatTitle, setChatTitle] = useState("");
-    const [chatId, setChatId] = useState("");
     const [userPrompt, setUserPrompt] = useState("");
+
+    const {chatId,chatTitle,convos,isLoading} = useRecoilValue(chatAtomSelector);
+    const setChatItems = useSetRecoilState(chatAtom);
 
     //fetch the initial convos
     const {data, refetch} = trpc.interview.getLatestChat.useQuery({},
         {
             enabled:false,
             onSuccess(data){
-                setChatId((chatId) => data?.chatId||"");
-                setChatTitle((t) => data?.chatTitle||"");
-                setConvos((conv) => data?.conversations||[]);
+                
+                setChatItems((prevChat)=>(
+                    {
+                        chatId:data?.chatId || "",
+                        chatTitle:data?.chatTitle || "",
+                        convos:data?.conversations || [],
+                        isLoading: false,
+                    }
+                ))
             }
         }
     );
     
     //mutation to get and post each user response
     const {mutate} = trpc.interview.getResponse.useMutation();
-    
-    const [convos, setConvos] = useState(data?.conversations||[]);
 
     useEffect(()=>{
         if(status==="authenticated"){
@@ -50,25 +56,27 @@ export default function Interview(){
         const content = userPrompt;
         setUserPrompt( pr => "");
 
-        setConvos((con)=>{
-            const existCon = con || [];
-            return [...existCon, {role:"user",content}];
-        })
+        setChatItems((oldChatItems)=>({
+            chatId:oldChatItems.chatId,
+            chatTitle:oldChatItems.chatTitle,
+            convos: [...oldChatItems.convos, {content, role:"user"}]
+        }))
 
         mutate({chatId,content},{
             onSuccess(data){
-            
-                setConvos((con)=>{
-                    const existCon = con || [];
-                    return [...existCon, {role:data?.role||"assistant",content:data?.content||""}];
-                })
+
+                setChatItems((prevState)=>({
+                    chatId:prevState.chatId,
+                    chatTitle:prevState.chatTitle,
+                    convos:[...prevState.convos, {role:data?.role||"assistant",content:data?.content||""}]
+                }))
 
             }
         })
     }
     
 
-    if(status === "loading"){
+    if(status === "loading" || isLoading){
         return(
             <div>
                 Loading ....
@@ -100,7 +108,7 @@ export default function Interview(){
 
                             <TextareaWithLabel userPrompt = {userPrompt} setUserPrompt = {setUserPrompt} />
 
-                            <Button onClick={()=>getResponse()}>
+                            <Button onClick={()=>getResponse()} >
                                 Submit
                             </Button>
 

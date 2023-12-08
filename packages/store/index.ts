@@ -2,7 +2,7 @@ export {
     RecoilRoot,
     atom,
     selector,
-    useRecoilState,
+    useSetRecoilState,
     useRecoilValue,
   } from 'recoil';
 
