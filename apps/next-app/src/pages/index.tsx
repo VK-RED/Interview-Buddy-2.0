@@ -8,13 +8,8 @@ export default function Home() {
   return (
     <div>
 
-      <Navbar profilePic = {session?.user?.image||""} 
-              status={status||""} 
-              signIn={signIn} 
-              signOut={signOut}
-      />
+      <Navbar />
 
-      
     </div>
   )
   

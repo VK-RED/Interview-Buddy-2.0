@@ -11,20 +11,25 @@ import {
 
 import { Avatar, AvatarFallback, AvatarImage } from "./src/ui/avatar";
 
-type AvatarTogglerType = {
-    profilePic : string,
-    status: "authenticated"|"unauthenticated"|"loading",
-    signIn:()=>{},
-    signOut:()=>{},
-}
+import { useRecoilValue, authAtomSelector } from "store";
 
-export function AvatarToggle({status,profilePic,signIn,signOut}:AvatarTogglerType){
+// type AvatarTogglerType = {
+//     profilePic : string,
+//     status: "authenticated"|"unauthenticated"|"loading",
+//     signIn:()=>{},
+//     signOut:()=>{},
+// }
+// {status,profilePic,signIn,signOut}:AvatarTogglerType
+export function AvatarToggle(){
+
+  const {signIn, signOut, useSession} = useRecoilValue(authAtomSelector)
+  const {data:session,status} = useSession();
 
     return(
         <DropdownMenu>
         <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
-                <AvatarImage src={profilePic} alt="@shadcn" />
+                <AvatarImage src={session?.user?.image||""} alt="@shadcn" />
                 <AvatarFallback>CN</AvatarFallback>
             </Avatar>
         </DropdownMenuTrigger>

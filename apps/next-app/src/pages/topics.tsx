@@ -1,5 +1,5 @@
 import { Navbar,InterviewCard, useToast  } from "ui"
-import { signIn, signOut, useSession } from "auth";
+import { useSession } from "auth";
 import { useRouter } from "next/router";
 import  { LANGUAGES,SUBJECTS } from "../assets/constants"
 import { trpc } from "../utils/trpc";
@@ -49,11 +49,7 @@ export default function Topics(){
         return(
             <div className="min-w-[500px]">
 
-                <Navbar signIn={signIn}
-                        signOut={signOut}
-                        profilePic={session?.user?.image || ""}
-                        status={status}
-                />
+                <Navbar/>
 
                 <div className="my-4 mx-2 flex flex-col items-center py-3 px-2 ">
                     

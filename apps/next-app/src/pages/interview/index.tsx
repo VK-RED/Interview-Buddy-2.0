@@ -1,5 +1,5 @@
 import { Navbar, useToast, ResponseCard, TextareaWithLabel, Button, InterviewScrollArea  } from "ui"
-import { signIn, signOut, useSession } from "auth";
+import { useSession } from "auth";
 import { useRouter } from "next/router";
 import { trpc } from "../../utils/trpc";
 import { useEffect, useState } from "react";
@@ -83,11 +83,7 @@ export default function Interview(){
 
             <div className="min-w-[500px]">
 
-                <Navbar signIn={signIn}
-                        signOut={signOut}
-                        profilePic={session?.user?.image || ""}
-                        status={status}
-                />
+                <Navbar />
 
                 <div className="h-screen mt-5 px-10 py-3">
 
