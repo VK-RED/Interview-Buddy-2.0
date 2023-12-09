@@ -1,8 +1,13 @@
+import { authAtomSelector, useRecoilValue } from "store";
 import { AvatarToggle } from "./avatarToggle";
 import { DarkModeToggle } from "./darkModeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from "./src/ui/avatar";
+import { Button } from "./src/ui/button";
 
 export function Navbar(){
+
+    const {useSession,signIn} = useRecoilValue(authAtomSelector);
+    const {status} = useSession();
 
     return (
         <div className="border  py-3 flex justify-between items-center">
@@ -10,7 +15,16 @@ export function Navbar(){
             <div className="flex space-x-5 mr-5">
                 
                 <DarkModeToggle /> 
-                <AvatarToggle />
+
+                {
+                    status === "authenticated"  ? <AvatarToggle />
+                    : (
+                        <Button onClick={()=>signIn()}>
+                            Login
+                        </Button>
+                    )
+                }
+                
 
             </div>
         </div>
