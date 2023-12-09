@@ -7,18 +7,6 @@ import { trpc } from "../../utils/trpc";
 import { chatAtom, chatAtomSelector, useRecoilValue, useSetRecoilState } from "store";
 
 
-/*
-    CHECK THE USER AUTHENTICATION
-    EXTRACT THE CHATID
-
-    GET THE RESPONSE USING THE CHATID
-
-    IF THE CHATID IS INVALID -> SHOW A TOAST AND REDIRECT THE USER BACK TO HOME PAGE
-    ELSE -> SHOW THE THINGS IN THE INTERVIEW PAGE ITSELF
-
-
-*/
-
 export default function InterviewById(){
 
     const params = useParams();
@@ -40,13 +28,12 @@ export default function InterviewById(){
 
         onSuccess(data){
             setChatItems((prev)=>({
-                chatId: data?.chat?.id||"",
-                chatTitle: data?.chat?.title||"",
-                convos:data?.chat?.conversations||[],
+                chatId: data?.chatId||"",
+                chatTitle: data?.chatTitle||"",
+                convos:data?.conversations||[],
                 isLoading:false,
             }));
 
-            console.log(convos);
         },
 
         onError(err) {

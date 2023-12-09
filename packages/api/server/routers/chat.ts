@@ -81,7 +81,7 @@ export const chatRouter = router({
                                         }
                                     });
 
-                                    return {chat}
+                                    return {chatId:chat.id,chatTitle:chat.title,conversations:chat.conversations.slice(1)}
                                 }
                                 
                             } catch (error) {
