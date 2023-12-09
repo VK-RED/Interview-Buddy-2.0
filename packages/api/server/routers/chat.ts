@@ -62,7 +62,7 @@ export const chatRouter = router({
 
                                 if(user){
 
-                                    const chat = await opts.ctx.prisma.chat.findUnique({
+                                    const chat = await opts.ctx.prisma.chat.findUniqueOrThrow({
                                         where:{
                                             id : opts.input.chatId,
                                         },
@@ -79,14 +79,14 @@ export const chatRouter = router({
                                                 }
                                             }
                                         }
-                                    })
+                                    });
 
                                     return {chat}
                                 }
                                 
                             } catch (error) {
                                 console.log(error);
-                                throw new TRPCError({code:"INTERNAL_SERVER_ERROR"});
+                                throw new TRPCError({code:"BAD_REQUEST",message:"ENTER VALID CHATID"});
                             }
 
                         }
