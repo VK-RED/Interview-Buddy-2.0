@@ -7,6 +7,7 @@ export { AlertDialoger } from "./alertDialoger"
 export { ResponseCard } from "./responseCard"
 export { TextareaWithLabel } from "./textAreawithLabel"
 export { InterviewScrollArea } from "./interviewScrollArea"
+export { InterviewPicker } from "./interviewPicker"
 export * from "./src/ui/accordion";
 export * from "./src/ui/button";
 export * from "./src/ui/dropdown-menu";
@@ -20,3 +21,5 @@ export * from "./src/ui/badge"
 export * from "./src/ui/textarea"
 export * from "./src/ui/label"
 export * from "./src/ui/scroll-area"
+export * from "./src/ui/popover"
+export * from "./src/ui/separator"
