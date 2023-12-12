@@ -8,6 +8,7 @@ export { ResponseCard } from "./responseCard"
 export { TextareaWithLabel } from "./textAreawithLabel"
 export { InterviewScrollArea } from "./interviewScrollArea"
 export { InterviewPicker } from "./interviewPicker"
+import { CreateAccount } from "./createAccount";
 export * from "./src/ui/accordion";
 export * from "./src/ui/button";
 export * from "./src/ui/dropdown-menu";
