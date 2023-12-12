@@ -27,7 +27,7 @@ export function CreateAccount(){
             </CardHeader>
             <CardContent className="grid gap-4">
                 <div>
-                <Button onClick={()=>signIn()} variant="outline" className="w-full">
+                <Button onClick={()=>signIn('google')} variant="outline" className="w-full">
                     <Icons.google className="mr-2 h-4 w-4" />
                     Google
                 </Button>
@@ -57,3 +57,4 @@ export function CreateAccount(){
         </Card>
     )
 }
+
