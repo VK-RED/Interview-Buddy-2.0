@@ -5,6 +5,7 @@ services:
     image: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=mysecretpassword
@@ -16,6 +17,8 @@ services:
     ports:
       - 3000:3000
       - 5555:5555
+    volumes:
+      - .:/usr/src/app
     depends_on:
       - postgres
     restart: always
