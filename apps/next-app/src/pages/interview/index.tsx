@@ -29,7 +29,11 @@ export default function Interview(){
                         isLoading: false,
                     }
                 ))
-            }
+            },
+            onError(err) {
+                console.log(err);
+                router.push("/");
+            },
         }
     );
     
