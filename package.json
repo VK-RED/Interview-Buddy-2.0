@@ -10,7 +10,8 @@
     "init-db" : "dotenv -e .env -- npm run migrate ",
     "migrate" : "cd packages/db && npx prisma migrate dev",
     "studio": "dotenv -e .env -- npm run init:studio",
-    "init:studio" : "cd packages/db && npx prisma studio"
+    "init:studio" : "cd packages/db && npx prisma studio & ",
+    "dx" : "npm run init-db && npm run studio && npm run dev"
   },
   "devDependencies": {
     "dotenv": "^16.3.1",  

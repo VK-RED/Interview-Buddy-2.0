@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+    ports:
+      - "5450:5432"
+
+  app:
+    build: .
+    ports:
+      - 3000:3000
+      - 5555:5555
+    depends_on:
+      - postgres
+    restart: always
+    
+volumes:
+  postgres_data:
+    
