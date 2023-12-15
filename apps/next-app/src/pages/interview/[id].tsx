@@ -69,6 +69,8 @@ export default function InterviewById(){
 
     useEffect(()=>{
 
+        if(status === "unauthenticated") router.push("/");
+
         if(status === "authenticated"){
             refetch();
         }

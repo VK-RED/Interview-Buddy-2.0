@@ -37,6 +37,9 @@ export default function Interview(){
     const {mutate} = trpc.interview.getResponse.useMutation();
 
     useEffect(()=>{
+
+        if(status === "unauthenticated") router.push("/");
+
         if(status==="authenticated"){
             
             toast({
