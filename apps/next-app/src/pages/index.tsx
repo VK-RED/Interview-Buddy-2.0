@@ -3,7 +3,7 @@ import {BookIcon, ClockIcon, GaugeIcon, GithubIcon, Navbar, XIcon} from "ui"
 
 export default function Home() {
   return (
-    <main key="1" className="flex flex-col min-h-screen">
+    <div key="1" className="flex flex-col min-h-screen">
       <Navbar />
       <section className="flex-grow w-full flex items-center justify-center py-12 dark:bg-black dark:text-white bg-white">
         <div className="container px-4 md:px-6">
@@ -17,34 +17,34 @@ export default function Home() {
                 Prepare for your interviews with confidence. Practice, learn, and succeed.
               </p>
             </div>
-            <div className="grid md:grid-cols-3 gap-10 my-36">
+            <div className="grid md:grid-cols-3 gap-10 py-10 px-6">
 
               <div className="flex flex-col items-center space-y-4">
-                <ClockIcon className="w-4 h-4 text-black dark:text-white" />
-                <h2 className="font-bold text-lg mt-2 text-black dark:text-white">Real Time Interviewing Experience</h2>
-                <div className="max-w-[300px] text-gray-500 md:text-lg text-center dark:text-gray-400 mx-auto">
+                <ClockIcon className="w-6 h-6 text-black dark:text-white" />
+                <h2 className="font-bold text-lg mt-2 text-black dark:text-white text-center">Real Time Interviewing Experience</h2>
+                <div className="max-w-[300px] text-gray-500 md:text-lg text-center dark:text-slate-400 mx-auto">
                   Live practice, real-time readiness.
                 </div>
               </div>
 
               <div className="flex flex-col items-center space-y-4">
-                <BookIcon className="w-4 h-4 text-black dark:text-white" />
-                <h2 className="font-bold text-lg mt-2 text-black dark:text-white">Test Your Knowledge Depth</h2>
-                <div className="max-w-[300px] text-gray-500 md:text-lg text-center dark:text-gray-400 mx-auto">
+                <BookIcon className="w-6 h-6 text-black dark:text-white" />
+                <h2 className="font-bold text-lg mt-2 text-black dark:text-white text-center">Test Your Knowledge Depth</h2>
+                <div className="max-w-[300px] text-gray-500 md:text-lg text-center  dark:text-slate-400 mx-auto">
                   Deep dives, showcase expertise.
                 </div>
               </div>
               <div className="flex flex-col items-center space-y-4">
-                <GaugeIcon className="w-4 h-4 text-black dark:text-white" />
-                <h2 className="font-bold text-lg mt-2 text-black dark:text-white">Handle Pressure Situations like a Pro</h2>
-                <div className="max-w-[300px] text-gray-500 md:text-lg text-center dark:text-gray-400 mx-auto">
+                <GaugeIcon className="w-6 h-6 text-black dark:text-white" />
+                <h2 className="font-bold text-lg mt-2 text-black dark:text-white text-center">Handle Pressure Situations like a Pro</h2>
+                <div className="max-w-[300px] text-gray-500 md:text-lg text-center dark:text-slate-400 mx-auto">
                   Master pressure, ace every situation.
                 </div>
               </div>
             </div>
             <div className="flex flex-col gap-4 min-[400px]:flex-row">
               <Link
-                className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300 mt-4"
+                className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-bold text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300 mt-4"
                 href="#"
               >
                 Get Started
@@ -54,11 +54,11 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="w-full py-8 bg-black text-white flex items-center justify-between">
+      <footer className="w-full py-8 bg-black text-white flex items-center justify-between dark:border-t dark:border-zinc-700">
         <div className="container px-4 md:px-6 flex justify-between">
-          <p className="text-left text-white ml-5">
+          <p className="text-left text-slate-400 ml-5">
             <Link href="/">
-              Built by <span className="hover:animate-pulse">VK</span>
+              Built by <span className="hover:animate-pulse text-white font-medium">VK</span>
             </Link>
             
           </p>
@@ -73,6 +73,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </main>
+    </div>
   )
 }
