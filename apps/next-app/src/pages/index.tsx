@@ -1,11 +1,12 @@
 import Link from "next/link"
 import {BookIcon, ClockIcon, GaugeIcon, GithubIcon, Navbar, XIcon} from "ui"
-import { useSession } from "auth"
+import { useSession,signIn } from "auth"
+import { useRouter } from "next/router";
 
 export default function Home() {
 
   const {status} = useSession();
-
+  const router = useRouter();
   return (
     <div key="1" className="flex flex-col min-h-screen">
       <Navbar />
@@ -47,12 +48,15 @@ export default function Home() {
               </div>
             </div>
             <div className="flex flex-col gap-4 min-[400px]:flex-row" aria-disabled={status==="loading"}>
-              <Link
+              <button
                 className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-bold text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300 mt-4"
-                href={status === "authenticated" ? "/topics" : "/signin"} 
+                onClick={()=>{
+                  if(status === "authenticated")  router.push("/topics");
+                  else signIn();
+                }} 
               >
                 Get Started
-              </Link>
+              </button>
             </div>
           </div>
         </div>
