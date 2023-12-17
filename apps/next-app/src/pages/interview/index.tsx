@@ -15,6 +15,8 @@ export default function Interview(){
     const {chatId,chatTitle,convos,isLoading} = useRecoilValue(chatAtomSelector);
     const setChatItems = useSetRecoilState(chatAtom);
 
+    const [disabled, setDisabled] = useState(false);
+
     //fetch the initial convos
     const {data, refetch} = trpc.interview.getLatestChat.useQuery({},
         {
@@ -60,6 +62,7 @@ export default function Interview(){
 
     function getResponse():void{
 
+        setDisabled((prev)=>true);
         const content = userPrompt;
         setUserPrompt( pr => "");
 
@@ -77,6 +80,8 @@ export default function Interview(){
                     chatTitle:prevState.chatTitle,
                     convos:[...prevState.convos, {role:data?.role||"assistant",content:data?.content||""}]
                 }))
+
+                setDisabled((prev)=>false);
 
             }
         })
@@ -115,7 +120,7 @@ export default function Interview(){
 
                             <TextareaWithLabel userPrompt = {userPrompt} setUserPrompt = {setUserPrompt} />
 
-                            <Button onClick={()=>getResponse()} >
+                            <Button onClick={()=>getResponse()} disabled={disabled}>
                                 Submit
                             </Button>
 
