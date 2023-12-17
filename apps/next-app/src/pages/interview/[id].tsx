@@ -90,7 +90,7 @@ export default function InterviewById(){
     else{
         return(
 
-            <div className="min-w-[500px]">
+            <div className="min-w-[500px] dark:bg-black">
 
                 <Navbar />
 

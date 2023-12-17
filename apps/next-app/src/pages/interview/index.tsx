@@ -100,7 +100,7 @@ export default function Interview(){
 
                 <Navbar />
 
-                <div className="h-screen mt-5 px-10 py-3">
+                <div className="h-screen mt-5 px-10 py-3 dark:bg-black">
 
                     <div className="relative ">
 
