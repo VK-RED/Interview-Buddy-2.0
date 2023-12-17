@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "npm run init:generate && turbo run build",
+    "build": "npm run init:generate && turbo run build --output public",
     "dev": "dotenv -- turbo dev --concurrency=11",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
