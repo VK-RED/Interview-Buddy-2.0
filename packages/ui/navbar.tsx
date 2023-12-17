@@ -13,7 +13,7 @@ export function Navbar(){
     
 
     return (
-        <div className="border  py-3 flex justify-between items-center">
+        <div className="py-5 flex justify-between items-center dark:border-b dark:border-zinc-700 dark:bg-black  shadow-lg">
             <h1 className="mx-10 font-bold text-2xl font-mono">Interview Buddy</h1>
             <div className="flex space-x-5 mr-5">
 
