@@ -22,15 +22,24 @@ export default function Home() {
               <div className="flex flex-col items-center space-y-4">
                 <ClockIcon className="w-4 h-4 text-black dark:text-white" />
                 <h2 className="font-bold text-lg mt-2 text-black dark:text-white">Real Time Interviewing Experience</h2>
+                <div className="max-w-[300px] text-gray-500 md:text-lg text-center dark:text-gray-400 mx-auto">
+                  Live practice, real-time readiness.
+                </div>
               </div>
 
               <div className="flex flex-col items-center space-y-4">
                 <BookIcon className="w-4 h-4 text-black dark:text-white" />
                 <h2 className="font-bold text-lg mt-2 text-black dark:text-white">Test Your Knowledge Depth</h2>
+                <div className="max-w-[300px] text-gray-500 md:text-lg text-center dark:text-gray-400 mx-auto">
+                  Deep dives, showcase expertise.
+                </div>
               </div>
               <div className="flex flex-col items-center space-y-4">
                 <GaugeIcon className="w-4 h-4 text-black dark:text-white" />
                 <h2 className="font-bold text-lg mt-2 text-black dark:text-white">Handle Pressure Situations like a Pro</h2>
+                <div className="max-w-[300px] text-gray-500 md:text-lg text-center dark:text-gray-400 mx-auto">
+                  Master pressure, ace every situation.
+                </div>
               </div>
             </div>
             <div className="flex flex-col gap-4 min-[400px]:flex-row">
