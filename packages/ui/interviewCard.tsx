@@ -22,7 +22,7 @@ export function InterviewCard({imgSrc, cardTitle, onClick} : InterviewCardPropTy
     return(
         
         <Card 
-            className="m-2 md:m-4 dark:text-zinc-200 shadow-lg border border-zinc-300 dark:border-neutral-600 relative py-5">
+            className="m-2 md:m-4 dark:text-zinc-200 shadow-lg border border-zinc-300 dark:border-neutral-600 relative py-5 dark:bg-black">
             <CardHeader>
                 <CardTitle>{cardTitle}</CardTitle>
             </CardHeader>
