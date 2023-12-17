@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "dotenv -e .env -- npx prisma generate --schema=packages/db/prisma/schema.prisma && turbo run build",
+    "build": "npm run init:generate && turbo run build",
     "dev": "dotenv -- turbo dev --concurrency=11",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -13,7 +13,7 @@
     "init:studio" : "cd packages/db && npx prisma studio & ",
     "dx" : "npm run init-db && npm run studio && npm run dev",
     "generate:prisma" : "cd packages/db && npx prisma generate",
-    "generate" : "dotenv -e .env -- npm run generate:prisma"
+    "init:generate" : "dotenv -e .env -- npm run generate:prisma"
   },
   "devDependencies": {
     "dotenv": "^16.3.1",  
