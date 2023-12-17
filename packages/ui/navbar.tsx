@@ -4,6 +4,7 @@ import { DarkModeToggle } from "./darkModeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from "./src/ui/avatar";
 import { Button } from "./src/ui/button";
 import { InterviewPicker } from "./interviewPicker";
+import Link from "next/link";
 
 export function Navbar(){
 
@@ -14,7 +15,10 @@ export function Navbar(){
 
     return (
         <div className="py-5 flex justify-between items-center dark:border-b dark:border-zinc-700 dark:bg-black  shadow-lg">
-            <h1 className="mx-10 font-bold text-2xl font-mono">Interview Buddy</h1>
+            <Link href="/">
+                <h1 className="mx-10 font-bold text-2xl font-mono">Interview Buddy</h1>
+            </Link>
+            
             <div className="flex space-x-5 mr-5">
 
                 {
