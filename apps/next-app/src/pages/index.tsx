@@ -1,7 +1,11 @@
 import Link from "next/link"
 import {BookIcon, ClockIcon, GaugeIcon, GithubIcon, Navbar, XIcon} from "ui"
+import { useSession } from "auth"
 
 export default function Home() {
+
+  const {status} = useSession();
+
   return (
     <div key="1" className="flex flex-col min-h-screen">
       <Navbar />
@@ -42,10 +46,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-4 min-[400px]:flex-row">
+            <div className="flex flex-col gap-4 min-[400px]:flex-row" aria-disabled={status==="loading"}>
               <Link
                 className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-bold text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300 mt-4"
-                href="#"
+                href={status === "authenticated" ? "/topics" : "/signin"} 
               >
                 Get Started
               </Link>
@@ -57,17 +61,17 @@ export default function Home() {
       <footer className="w-full py-8 bg-black text-white flex items-center justify-between dark:border-t dark:border-zinc-700">
         <div className="container px-4 md:px-6 flex justify-between">
           <p className="text-left text-slate-400 ml-5">
-            <Link href="/">
+            <Link href="https://github.com/VK-RED">
               Built by <span className="hover:animate-pulse text-white font-medium">VK</span>
             </Link>
             
           </p>
           <div />
           <div className="flex space-x-4">
-            <Link href="/">
+            <Link href="https://github.com/VK-RED">
               <GithubIcon className="w-4 h-4 text-white" />
             </Link>
-            <Link href="/">
+            <Link href="https://twitter.com/focusedVK">
               <XIcon className="w-4 h-4 text-white" />
             </Link>
           </div>
