@@ -101,11 +101,11 @@ export default function Interview(){
     else{
         return(
 
-            <div className="min-w-[500px]">
+            <div className="min-w-[500px]  dark:bg-black">
 
                 <Navbar />
 
-                <div className="h-screen mt-5 px-10 py-3 dark:bg-black">
+                <div className="h-screen mt-5 px-10 py-3">
 
                     <div className="relative ">
 
