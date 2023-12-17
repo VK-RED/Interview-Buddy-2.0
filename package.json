@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "npm run generate && turbo run build",
+    "build": "dotenv -e .env -- npx prisma generate --schema=packages/db/prisma/schema.prisma && turbo run build",
     "dev": "dotenv -- turbo dev --concurrency=11",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
