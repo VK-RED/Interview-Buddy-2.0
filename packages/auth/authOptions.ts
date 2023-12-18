@@ -44,5 +44,15 @@ export const authOptions = {
     },
     pages:{
       signIn:"/signin",
+    },
+    callbacks:{
+      async redirect({url,baseUrl}:{url:string,baseUrl:string}){
+        // console.log("The flow being affected !!!!!")
+        // console.log(url, "<------------- This has defined in the dashboard")
+        // console.log(baseUrl, "<------------- Base Url of the site")
+        return url.startsWith(baseUrl)
+          ? Promise.resolve(baseUrl+"/topics")
+          : Promise.resolve(baseUrl)
+      }
     }
   }
