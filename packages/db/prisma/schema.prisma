@@ -73,6 +73,7 @@ model User {
   sessions      Session[]
   conversation  Conversation[]
   chat          Chat[]
+  password      String?
 }
 
 model VerificationToken {
