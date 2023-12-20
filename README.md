@@ -22,7 +22,45 @@ This repository uses [Turbo](https://turbo.build/repo) as the Monorepo.
 
 ### Docker Setup
 
-The Docker Setup will be coming soon !!! 
+- Clone the repo to your local machine using the following command :
+
+```
+git clone https://github.com/VK-RED/Interview-Buddy-2.0.git
+```
+- Navigate to the project's root folder
+
+```
+cd Interview-Buddy-2.0
+```
+- Setup the env variables
+
+```
+cp .env.example .env
+```
+- Use `openssl rand -base64 32` to generate a key and add it under `NEXTAUTH_SECRET` in the .env file.
+- Use your own API keys for the following environment variables `GOOGLE_ID`, `GOOGLE_SECRET`, `OPENAI_API_KEY` in the .env file
+
+- Install all the dependencies in the root folder using the command
+
+```
+npm i
+```
+- Now start running the app at the root folder in terminal, using the command below
+
+```
+docker compose -f docker-compose-dev.yml up
+```
+
+- You can bring down the app by running the command below in the terminal, at the root folder
+
+```
+docker compose -f docker-compose-dev.yml down
+```
+
+- Now if you visit http://localhost:3000 the app should be running up. 
+- You can visit http://localhost:5555 to see the Prisma Studio for visualising the Database.
+
+
 
 ### Manual Setup
 
