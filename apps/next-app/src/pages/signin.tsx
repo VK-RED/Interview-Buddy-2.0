@@ -1,6 +1,6 @@
 import { authOptions, getProviders, getServerSession } from "auth";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { CreateAccount } from "ui/createAccount";
+import { SigninCard } from "ui/createAccount";
 
 export default function Signin({
     providers,
@@ -10,7 +10,7 @@ export default function Signin({
 
     return (
         <div className="h-screen border flex justify-center items-center min-w-[500px]">  
-            <CreateAccount/>            
+            <SigninCard/>            
         </div>
     )
 }

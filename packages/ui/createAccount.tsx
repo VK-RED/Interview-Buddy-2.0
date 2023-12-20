@@ -17,7 +17,7 @@ import { useSearchParams } from "next/navigation"
 import { useRouter } from "next/router"
 import { useToast } from "./src/ui/use-toast"
 
-export function CreateAccount(){
+export function SigninCard(){
 
     const {signIn} = useRecoilValue(authAtomSelector);
     const [password, setPassword] = useState("");
