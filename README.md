@@ -1,7 +1,5 @@
 # Interview Buddy 2.0
 
-:construction:  **NOTE : The Application is currently in Development**  :construction:
-
 Interview Buddy is an open source platform to help you land your next technical interview. Practice in an interview environment with simulated scenarios and real-time feedback. Build confidence and face interviews with a prepared and positive mindset, ready to shine.
 
 ## Tech Stack
@@ -88,6 +86,12 @@ cp .env.example .env
 npm i
 ```
 
+- Generate the Prisma Client using the following command
+
+```
+npm run init:generate
+```
+
 
 - Run the Prisma Migrations using the following command
 
@@ -102,7 +106,16 @@ npm run init-db
 npm run dev
 ```
 
-- Now you can see your frontend being served at http://localhost:3000/
+- Now you can see your app being served at http://localhost:3000/
+
+
+- You can run the below command at the root folder to visualize the Database. 
+
+```
+npm run studio
+```
+
+After running the command check http://localhost:5555 to see the DB models
 
 
 ## What's inside
@@ -118,6 +131,8 @@ npm run dev
     - The `packages/tailwindconfig`contains tailwind configuration which is being used by `app` and the `ui` package.
     - The `packages/tsconfig` contains tailwind configurations which is being used by throughout the enire repo.
     - The `packages/ui` contains the shadcn/ui components. It is re-usable components and being styled using TailwindCSS.
+    - The `packages/store` contains the recoil atoms and selectors.
+    - The `packages/features` contains auxillary libraries used by other packages.
 
 ### Contributions
 
