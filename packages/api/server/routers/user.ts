@@ -1,7 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { procedure, router } from "../trpc";
 import {z} from 'zod';
-
+import { bcrypt } from "features";
 
 export const userRouter = router({
     signup:  procedure
@@ -17,12 +17,14 @@ export const userRouter = router({
                     try {
                         const existUser = await prisma.user.findUnique({where:{email}});
 
+                        const hashedPassword = bcrypt.hashSync(password,10);
+
                         if(!existUser){
                             const user = await prisma.user.create({
                                 data:{
                                     name:userName,
                                     email,
-                                    password,
+                                    password:hashedPassword,
                                 }
                             })
 

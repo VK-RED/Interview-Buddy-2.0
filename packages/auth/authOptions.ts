@@ -4,6 +4,8 @@ import {PrismaAdapter} from "@auth/prisma-adapter"
 import {PrismaClient} from "@prisma/client"
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials"
+import { bcrypt } from "features";
+
 const prisma = new PrismaClient()
 
 export const authOptions = {
@@ -43,8 +45,12 @@ export const authOptions = {
           const user = await prisma.user.findUnique({where:{
             email:credentials.email,
           }})
-          
-          if(!user || user.password !== credentials.password) return  null;
+
+          if(!user) return null;
+
+          const isPasswordValid = bcrypt.compareSync(credentials.password, user.password||"");
+
+          if(!isPasswordValid) return null;
           
           return user;
           
