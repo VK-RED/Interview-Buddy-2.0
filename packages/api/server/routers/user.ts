@@ -33,7 +33,7 @@ export const userRouter = router({
                         }
                     } catch (error) {
                         console.log(error);
-                        throw new TRPCError({code:"INTERNAL_SERVER_ERROR"});
+                        throw new TRPCError({code:"BAD_REQUEST",message:"User Exists Already, Try Signing in !!"});
                     }
                     
                 })
