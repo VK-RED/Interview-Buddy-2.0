@@ -3,6 +3,7 @@ import { chatRouter } from './chat';
 import { healthRouter } from './health';
 import { interviewRouter } from './interview';
 import { metaRouter } from './metaDetails';
+import { userRouter } from './user';
 
 export const appRouter = router({
   
@@ -10,6 +11,7 @@ export const appRouter = router({
   interview: interviewRouter,
   meta: metaRouter,
   chat: chatRouter,
+  user: userRouter
 });
 
 // export type definition of API
