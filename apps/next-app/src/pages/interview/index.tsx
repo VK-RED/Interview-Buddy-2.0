@@ -1,4 +1,4 @@
-import { Navbar, useToast, ResponseCard, TextareaWithLabel, Button, InterviewScrollArea  } from "ui"
+import { Navbar, useToast, ResponseCard, TextareaWithLabel, Button, InterviewScrollArea, Loader  } from "ui"
 import { useSession } from "auth";
 import { useRouter } from "next/router";
 import { trpc } from "../../utils/trpc";
@@ -90,9 +90,7 @@ export default function Interview(){
 
     if(status === "loading" || isLoading){
         return(
-            <div>
-                Loading ....
-            </div>
+            <Loader />
         )
     }
     else if(status === "unauthenticated"){

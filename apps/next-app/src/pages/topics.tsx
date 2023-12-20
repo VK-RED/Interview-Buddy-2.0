@@ -1,4 +1,4 @@
-import { Navbar,InterviewCard, useToast  } from "ui"
+import { Navbar,InterviewCard, useToast, Loader  } from "ui"
 import { useSession } from "auth";
 import { useRouter } from "next/router";
 import  { LANGUAGES,SUBJECTS } from "../assets/constants"
@@ -37,9 +37,7 @@ export default function Topics(){
 
     if(status === "loading"){
         return(
-            <div>
-                Loading ....
-            </div>
+            <Loader />
         )
     }
     else if(status === "unauthenticated"){

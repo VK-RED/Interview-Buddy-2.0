@@ -2,7 +2,7 @@ import { useSession } from "auth";
 import { useParams } from "next/navigation"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Button, InterviewScrollArea, Navbar, TextareaWithLabel, useToast } from "ui";
+import { Button, InterviewScrollArea, Navbar, TextareaWithLabel, useToast, Loader } from "ui";
 import { trpc } from "../../utils/trpc";
 import { chatAtom, chatAtomSelector, useRecoilValue, useSetRecoilState } from "store";
 
@@ -81,9 +81,7 @@ export default function InterviewById(){
 
     if(status === "loading" || isLoading){
         return(
-            <div>
-                Loading ....
-            </div>
+            <Loader />
         )
     }
     else if(status === "unauthenticated"){
