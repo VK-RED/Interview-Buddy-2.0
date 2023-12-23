@@ -12,3 +12,5 @@ export const SUBJECTS : {name:string, src :string}[] = [
     {name:"Database Management" , src : "dbms.jpeg"},
     {name:"Computer Networks" , src : "cn.jpeg"},
 ]
+
+export const AVATAR = "avatar.jpeg"

@@ -10,6 +10,7 @@ export { InterviewScrollArea } from "./interviewScrollArea"
 export { InterviewPicker } from "./interviewPicker"
 export { SigninCard,SignupCard } from "./createAccount";
 export { Loader } from "./loader"
+export { ProfileCard } from "./profileCard"
 export * from "./src/ui/accordion";
 export * from "./src/ui/button";
 export * from "./src/ui/dropdown-menu";

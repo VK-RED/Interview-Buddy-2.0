@@ -1,10 +1,14 @@
 import { useSession } from "auth"
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { Loader, Navbar } from "ui";
+import { useEffect, useState } from "react";
+import { Loader, Navbar, ProfileCard } from "ui";
 import { trpc } from "../utils/trpc";
 import { useToast } from "ui";
+import {AVATAR} from "../assets/constants"
 export default function Profile(){
+
+    const [totalConvos,setTotalConvos] = useState(0);
+    const [totalChats, setTotalChats] = useState(0);
 
     const {data:session, status} = useSession();
     const router = useRouter();
@@ -14,7 +18,7 @@ export default function Profile(){
     const convoData = trpc.meta.countTotalConvos.useQuery({},{
         enabled:false,
         onSuccess(data) {
-            console.log(data);
+            setTotalConvos((c)=>data?.totalConversations||c)
         },
         onError(err) {
             toast({description:"Something went wrong with getting total conversations",variant:"destructive"});
@@ -26,7 +30,7 @@ export default function Profile(){
     const chatData = trpc.meta.countChats.useQuery({},{
         enabled:false,
         onSuccess(data) {
-            console.log(data);
+            setTotalChats((ch)=>data?.totalChats||ch);
         },
         onError(err) {
             toast({description:"Something went wrong with getting total chats",variant:"destructive"});
@@ -46,7 +50,7 @@ export default function Profile(){
     return (
         <div>
             {
-                status === "loading" 
+                (status === "loading"||chatData.isLoading||convoData.isLoading) 
                 ? <Loader /> :
 
                 <div className="min-w-[500px] dark:bg-black h-screen">
@@ -58,7 +62,8 @@ export default function Profile(){
                             Profile
                         </h1>
 
-
+                        <ProfileCard totalChats={totalChats} totalConvos={totalConvos} AVATAR={AVATAR}/>
+                        
                     </div>
                     
 
